@@ -1,7 +1,11 @@
 import { useState } from 'react';
 
 import { MainLayout } from '../../../layouts/Main';
-import { StyledContainer, StyledParagraph } from './style';
+import {
+	StyledContainer,
+	StyledButtonContainer,
+	StyledParagraph,
+} from './style';
 import { Button } from '../../../components';
 
 const UseStateComponent = () => {
@@ -15,12 +19,21 @@ const UseStateComponent = () => {
 		setValue(value + 1);
 	};
 
+	const asyncIncreaseValue = () => {
+		setTimeout(() => {
+			setValue((value) => value + 1);
+		}, 2000);
+	};
+
 	return (
 		<MainLayout title='useState hook'>
 			<StyledContainer>
-				<Button onClickHandler={decreaseValue}>-</Button>
 				<StyledParagraph>{value}</StyledParagraph>
-				<Button onClickHandler={increaseValue}>+</Button>
+				<StyledButtonContainer>
+					<Button onClickHandler={decreaseValue}>Decrease</Button>
+					<Button onClickHandler={increaseValue}>Increase</Button>
+					<Button onClickHandler={asyncIncreaseValue}>Async Increase</Button>
+				</StyledButtonContainer>
 			</StyledContainer>
 		</MainLayout>
 	);
